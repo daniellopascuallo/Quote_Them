@@ -1,0 +1,27 @@
+body {
+    margin: 0px;
+}
+
+#wrapper {
+    width: 950px;
+    height: 900px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.quote_container {
+    width: 250px;
+    height: 150px;
+    border: 1px solid black;
+    padding: 5x;
+    margin: 5px;
+    text-align: left;
+}
+
+#quote_form {
+    width: 250px;
+    height: 150px;
+    padding: 5x;
+}
+

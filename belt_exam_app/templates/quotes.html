@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <p style="margin-left: 700px;"><a href="/edit/{{userLoggedIn.id}}">Edit My Account</a> | <a
+            href="/logout">Logout</a></p>
+    <h1>Welcome {{userLoggedIn.first_name}}!</h1>
+    <div id="wrapper">
+        <div id="quote_big_container">
+            <h3>Quotes</h3>
+            {% for quote in allQuotes %}
+            <div class="quote_container">
+                <p>{{quote.author}}: {{quote.content}}</p>
+                <p>Posted by <a href="/user/{{quote.user.id}}">{{quote.user.first_name}}</a></p>
+                <p>{{quote.likes.all.count}} people liked this</p>
+                <a href="/like_quote/{{quote.id}}">Like!</a>
+                <br>
+                {% if userLoggedIn == quote.user %}<a href="/delete_quote/{{quote.id}}">Delete</a>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="quote_form">
+            <h3>Add a Quote!</h3>
+            <!-- entering validation messages before the form -->
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/add_quote" method="post">
+                {% csrf_token %}
+                <label for="author">Author</label>
+                <input type="text" name="form_author" id="author">
+                <br>
+                <br>
+                <label for="quote">Quote</label>
+                <br>
+                <br>
+                <textarea name="form_content" id="quote" cols="30" rows="10"></textarea>
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

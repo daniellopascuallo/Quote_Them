@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Web Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <div class="form_container" style="display:inline-block; vertical-align: top;">
+        <h1>Register</h1>
+        <!-- entering validation messages before the form -->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action="/registration" method="post">
+            {% csrf_token %}
+            <label for="first_name">First Name</label>
+            <input type="text" name="form_first_name" id="first_name">
+            <br>
+            <br>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="form_last_name" id="last_name">
+            <br>
+            <br>
+            <label for="email">Email</label>
+            <input type="text" name="form_email" id="email">
+            <br>
+            <br>
+            <label for="password">Password</label>
+            <input type="password" name="form_password" id="password">
+            <br>
+            <br>
+            <label for="confirm_password">Confirm PW</label>
+            <input type="password" name="form_confirm_password" id="confirm_password">
+            <br>
+            <br>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+
+    <div class="form_container" style="display:inline-block; vertical-align: top; margin-left: 175px;">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <label for="email">Email</label>
+            <input type="text" name="form_email" id="email">
+            <br>
+            <br>
+            <label for="password">Password</label>
+            <input type="password" name="form_password" id="password">
+            <br>
+            <br>
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+</body>
+
+</html>
